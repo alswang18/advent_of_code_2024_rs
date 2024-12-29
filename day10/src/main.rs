@@ -4,7 +4,6 @@ fn is_valid_pos(row: i32, col: i32, rows: usize, cols: usize) -> bool {
     row >= 0 && col >= 0 && row < rows as i32 && col < cols as i32
 }
 
-#[derive(Clone)]
 struct Solver {
     set: HashSet<(usize, usize)>,
 }
