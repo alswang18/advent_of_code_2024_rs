@@ -81,6 +81,7 @@ fn main() {
     let cols = grid[0].len();
 
     let mut count_a = 0;
+    let mut timer = std::time::Instant::now();
     for r in 0..rows {
         for c in 0..cols {
             if grid[r][c] == 0 {
@@ -91,7 +92,9 @@ fn main() {
             }
         }
     }
-
+    println!("Count 10a: {}", count_a);
+    println!("Time duration in {} us", timer.elapsed().as_micros());
+    timer = std::time::Instant::now();
     let mut count_b = 0;
     for r in 0..rows {
         for c in 0..cols {
@@ -104,6 +107,6 @@ fn main() {
         }
     }
 
-    println!("Count 10a: {}", count_a);
     println!("Count 10b: {}", count_b);
+    println!("Time duration in {} us", timer.elapsed().as_micros());
 }

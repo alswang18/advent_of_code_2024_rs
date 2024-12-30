@@ -152,12 +152,20 @@ fn main() {
     solver.solve(&grid);
 
     let mut price_a = 0;
-    let mut price_b = 0;
+    let mut timer = std::time::Instant::now();
+
     for island in solver.islands.iter() {
         price_a += island.get_area() * island.get_perimeter();
-        price_b += island.get_area() * island.get_number_of_sides(grid.len(), grid[0].len());
     }
 
     println!("Price of islands A are: {}", price_a);
+    println!("Time duration in {} us", timer.elapsed().as_micros());
+
+    let mut price_b = 0;
+    timer = std::time::Instant::now();
+    for island in solver.islands.iter() {
+        price_b += island.get_area() * island.get_number_of_sides(grid.len(), grid[0].len());
+    }
     println!("Price of islands B are: {}", price_b);
+    println!("Time duration in {} us", timer.elapsed().as_micros());
 }

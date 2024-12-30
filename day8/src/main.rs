@@ -80,17 +80,19 @@ fn main() {
                 .push((i as i32, j as i32));
         }
     }
-
+    let mut timer = std::time::Instant::now();
     let mut set_8a: HashSet<(i32, i32)> = HashSet::new();
     for v in symbol_to_loc.values() {
         set_8a.extend(gen_valid_antinodes_8a(&grid, v).into_iter());
     }
-
+    println!("Time duration in {} us", timer.elapsed().as_micros());
+    println!("Count of unique antinodes 8a: {}", set_8a.len());
+    timer = std::time::Instant::now();
     let mut set_8b: HashSet<(i32, i32)> = HashSet::new();
     for v in symbol_to_loc.values() {
         set_8b.extend(gen_valid_antinodes_8b(&grid, v).into_iter());
     }
+    println!("Time duration in {} us", timer.elapsed().as_micros());
 
-    println!("Count of unique antinodes 8a: {}", set_8a.len());
     println!("Count of unique antinodes 8b: {}", set_8b.len());
 }

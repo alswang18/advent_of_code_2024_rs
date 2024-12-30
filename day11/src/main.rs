@@ -55,14 +55,24 @@ fn main() {
         .filter_map(|num| num.parse::<u64>().ok())
         .collect::<Vec<u64>>();
 
+    let mut timer = std::time::Instant::now();
     let mut count_a = 0;
     for &stone in stones.iter() {
         let mut base_stone = BaseStone {
             memo: HashMap::default(),
         };
-        count_a += base_stone.dfs(10000, stone);
+        count_a += base_stone.dfs(25, stone);
     }
-
-    // println!("{:?}", stones);
-    println!("Now I have {} stones.", count_a);
+    println!("Now I have {} stones in count A.", count_a);
+    println!("Timer in {} us", timer.elapsed().as_micros());
+    timer = std::time::Instant::now();
+    let mut count_b = 0;
+    for &stone in stones.iter() {
+        let mut base_stone = BaseStone {
+            memo: HashMap::default(),
+        };
+        count_b += base_stone.dfs(75, stone);
+    }
+    println!("Now I have {} stones in count B.", count_b);
+    println!("Timer in {} us", timer.elapsed().as_micros());
 }

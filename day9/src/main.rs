@@ -104,13 +104,15 @@ fn main() {
             id += 1;
         }
     }
-
+    let mut timer = std::time::Instant::now();
     let mut checksum_6a: u64 = 0;
 
     for (i, num) in compress_slots(&slots).into_iter().enumerate() {
         checksum_6a += i as u64 * num as u64;
     }
-
+    println!("Time duration in {} us", timer.elapsed().as_micros());
+    println!("9a checksum is: {}", checksum_6a);
+    timer = std::time::Instant::now();
     let mut checksum_6b: u64 = 0;
 
     for (i, num) in compress_files(&slots).into_iter().enumerate() {
@@ -119,7 +121,7 @@ fn main() {
         }
         checksum_6b += i as u64 * num.unwrap() as u64;
     }
+    println!("Time duration in {} us", timer.elapsed().as_micros());
 
-    println!("9a checksum is: {}", checksum_6a);
     println!("9b checksum is: {}", checksum_6b);
 }
