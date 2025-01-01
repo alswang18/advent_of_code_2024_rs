@@ -2,7 +2,7 @@
   description = "Rust development environment";
 
   inputs = {
-    nixpkgs.url = "github:nixpkgs/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
     flake-utils.url = "github:numtide/flake-utils";
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -34,6 +34,7 @@
             rustfmt
             clippy
             rust-analyzer
+            go
 
             # Shell utilities
             zsh
@@ -54,6 +55,10 @@
           ];
 
           shellHook = ''
+            # Use zsh as the default shell
+            export SHELL=${pkgs.zsh}/bin/zsh
+            exec ${pkgs.zsh}/bin/zsh
+
             # Git configuration
             git config --global user.name "alswang18"
             git config --global user.email "alec.sy.wang@gmail.com"
@@ -62,9 +67,6 @@
             export ZDOTDIR="$HOME/.config/zsh"
             export ZSH=${pkgs.oh-my-zsh}/share/oh-my-zsh
             export ZSH_CUSTOM="$ZDOTDIR/custom"
-
-            # Set theme
-            export ZSH_THEME="bureau"
 
             # Ensure directories exist
             mkdir -p "$ZDOTDIR/plugins"
